@@ -53,17 +53,17 @@ void quickSort(T* first, T* last, Compare comp) {
             if (il >= ir) {
                 break;
             }
-            std::swap(*(il++), *(ir--));            //Меняем элементы местами
+            std::swap(*il++, *ir--);            //Меняем элементы местами
         }
 
         std::swap(*ir, *value);            //Меняем элементы местами
         //Рекурсивные вызовы, если осталось, что сортировать
         if (ir - first > last - ir) {
-            quick_sort(ir + 1, last, comp);
+            quickSort(ir + 1, last, comp);
             last = ir - 1;
         }
         else {
-            quick_sort(first, ir - 1, comp);
+            quickSort(first, ir - 1, comp);
             first = ir + 1;
         }
     }
@@ -84,6 +84,7 @@ int main()
     addDigits(a,20);
     //insertionSort(a, a + 9, [](int a, int b) { return a < b; });
     quickSort(a, a + 19, [](int a, int b) { return a < b; });
+    
     std::cout << "\n";
    for (int i = 0; i < 20; i++) {
         std::cout << a[i] << " ";

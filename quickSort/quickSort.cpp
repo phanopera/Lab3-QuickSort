@@ -1,6 +1,3 @@
-// quickSort.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
 #include <iostream>
 
 template<typename T, typename Compare>
@@ -16,11 +13,11 @@ bool comp(const T& a, const T& b) {
 template<typename T, typename Compare>
 void insertionSort(T* first, T* last, Compare comp) {
     if (first == last) { return; }
-    for (T* i = first+1; i <= last; i++) {
+    for (T* i = first + 1; i <= last; i++) {
         T value = *i;        //массив 2й элемент
-        T* j = i-1;
+        T* j = i - 1;
         // найти индекс `j` в отсортированном подмножестве `T*[0…i-1]`, где находится элемент `T*[i]`
-        while (j >= first && comp(value,*j))
+        while (j >= first && comp(value, *j))
         {
             *(j + 1) = std::move(*j);
             j--;
@@ -37,17 +34,36 @@ void quickSort(T* first, T* last, Compare comp) {
     while (last > first) {
         T* il = first;//0
         T* ir = last;//z
-        //T* mid = first + (last - first) / 2;
-
+        T* mid = first + (last - first) / 2;//Центральный элемент массива
+        if (comp(*first, *last)) { //first<last
+            if (comp(*first, *mid)) { //first<mid
+                if (comp(*last, *mid)) {
+                    mid = last;//средний - ласт
+                }
+                //средний - мид
+            }
+            //средний - мид
+        }
+        else {//last<first
+            if (comp(*first, *mid)) { //first<mid
+                mid = first;//средний - ферст
+            }
+            else {
+                if (comp(*mid, *last)) {
+                    mid = last;//средний - ласт
+                }
+                //средний - ласт
+            }
+        }
         T* value = first;
         //Пробегаем элементы, ищем те, которые нужно перекинуть в другую часть
         //В левой части массива пропускаем(оставляем на месте) элементы, которые меньше центрального
         while (true) {
             while (comp(*il, *value)) {
-                il++; 
+                il++;
             }
             while (comp(*value, *ir)) {
-                ir--; 
+                ir--;
             }
 
             if (il >= ir) {
@@ -73,21 +89,25 @@ void quickSort(T* first, T* last, Compare comp) {
 void addDigits(int* mas, int size) {
     for (int i = 0; i < size; i++) {
         mas[i] = rand() % size;
-        std::cout << mas[i]<<" ";
+        std::cout << mas[i] << " ";
+    }
+}
+void showDigits(int* mas, int size) {
+    for (int i = 0; i < size; i++) {
+        std::cout << mas[i] << " ";
     }
 }
 
 int main()
 {
-    int a[20];
-    addDigits(a,20);
+    int size = 50;
+    int a[50];
+    addDigits(a, size);
+    //quickSort(a, a, true);
     //insertionSort(a, a + 9, [](int a, int b) { return a < b; });
-    quickSort(a, a + 19, [](int a, int b) { return a < b; });
-    
+    quickSort(a, a + size - 1, [](int a, int b) { return a < b; });
     std::cout << "\n";
-   for (int i = 0; i < 20; i++) {
-        std::cout << a[i] << " ";
-    }
+    showDigits(a, size);
     //int a[100];
     //sort(a, a + 100, [](int a, int b) { return a < b; });
    // std::cout << "Hello World!\n";

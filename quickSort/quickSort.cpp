@@ -72,8 +72,7 @@ void quickSort(T* first, T* last, Compare comp) {
 
 void addDigits(int* mas, int size) {
     for (int i = 0; i < size; i++) {
-        int value = rand() % size;
-        mas[i] = value;
+        mas[i] = rand() % size;
         std::cout << mas[i]<<" ";
     }
 }

@@ -1,4 +1,4 @@
-﻿// quickSort.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+// quickSort.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include <iostream>
@@ -6,20 +6,21 @@
 template<typename T, typename Compare>
 void sort(T* first, T* last, Compare comp) {}
 
-template<typename T>
+/*template<typename T>
 bool comp(const T& a, const T& b) {
     if (a < b) { return true; }
     else { return false; }
-}
+}*/
 
 //сортировка вставками https://www.techiedelight.com/ru/insertion-sort-iterative-recursive/
 template<typename T, typename Compare>
 void insertionSort(T* first, T* last, Compare comp) {
-    for (T* i = first+1; i < last; i++) {
+    if (first == last) { return; }
+    for (T* i = first+1; i <= last; i++) {
         T value = *i;        //массив 2й элемент
         T* j = i-1;
         // найти индекс `j` в отсортированном подмножестве `T*[0…i-1]`, где находится элемент `T*[i]`
-        while (j > 0 && comp(value,*j))
+        while (j >= first && comp(value,*j))
         {
             *(j + 1) = std::move(*j);
             j--;
@@ -33,13 +34,64 @@ void insertionSort(T* first, T* last, Compare comp) {
 template<typename T, typename Compare>
 void quickSort(T* first, T* last, Compare comp) {
 
+    while (last > first) {
+        T* il = first;//0
+        T* ir = last;//z
+        //T* mid = first + (last - first) / 2;
+
+        T* value = first;
+        //Пробегаем элементы, ищем те, которые нужно перекинуть в другую часть
+        //В левой части массива пропускаем(оставляем на месте) элементы, которые меньше центрального
+        while (true) {
+            while (comp(*il, *value)) {
+                il++; 
+            }
+            while (comp(*value, *ir)) {
+                ir--; 
+            }
+
+            if (il >= ir) {
+                break;
+            }
+            std::swap(*(il++), *(ir--));            //Меняем элементы местами
+        }
+
+        std::swap(*ir, *value);            //Меняем элементы местами
+        //Рекурсивные вызовы, если осталось, что сортировать
+        if (ir - first > last - ir) {
+            quick_sort(ir + 1, last, comp);
+            last = ir - 1;
+        }
+        else {
+            quick_sort(first, ir - 1, comp);
+            first = ir + 1;
+        }
+    }
+}
+
+
+void addDigits(int* mas, int size) {
+    for (int i = 0; i < size; i++) {
+        int value = rand() % size;
+        mas[i] = value;
+        std::cout << mas[i]<<" ";
+    }
 }
 
 int main()
 {
-    int a[100];
-    sort(a, a + 100, [](int a, int b) { return a < b; });
-    std::cout << "Hello World!\n";
+    int a[20];
+    addDigits(a,20);
+    //insertionSort(a, a + 9, [](int a, int b) { return a < b; });
+   // quickSort(a, a + 19, [](int a, int b) { return a < b; });
+    quick_sort(a, a + 19, [](int a, int b) { return a < b; });
+    std::cout << "\n";
+   for (int i = 0; i < 20; i++) {
+        std::cout << a[i] << " ";
+    }
+    //int a[100];
+    //sort(a, a + 100, [](int a, int b) { return a < b; });
+   // std::cout << "Hello World!\n";
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

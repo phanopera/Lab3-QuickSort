@@ -83,8 +83,7 @@ int main()
     int a[20];
     addDigits(a,20);
     //insertionSort(a, a + 9, [](int a, int b) { return a < b; });
-   // quickSort(a, a + 19, [](int a, int b) { return a < b; });
-    quick_sort(a, a + 19, [](int a, int b) { return a < b; });
+    quickSort(a, a + 19, [](int a, int b) { return a < b; });
     std::cout << "\n";
    for (int i = 0; i < 20; i++) {
         std::cout << a[i] << " ";

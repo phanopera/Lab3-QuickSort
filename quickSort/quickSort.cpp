@@ -2,7 +2,7 @@
 //
 
 #include <iostream>
-int optimisation=16;
+const int optimisation=16;
 template<typename T, typename Compare>
 void sort(T* first, T* last, Compare comp) {
     while (first < last) {

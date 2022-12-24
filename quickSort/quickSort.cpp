@@ -1,11 +1,11 @@
 #include <iostream>
-const int optimisation = 16;
+const int optimisation = 4;
 template<typename T, typename Compare>
 void sort(T* first, T* last, Compare comp) {
             if (first == last) { return; }
 
            
-            while(last - first > optimisation) {
+            if(last - first > optimisation) {
 
                 T* il = first;//0
                 T* ir = last;//z
@@ -63,7 +63,9 @@ void sort(T* first, T* last, Compare comp) {
                     sort(il, last, comp);
                 }
             }
-            insertionSort(first, last, comp);
+            else {
+                insertionSort(first, last, comp);
+            }
 }
 
 //сортировка вставками https://www.techiedelight.com/ru/insertion-sort-iterative-recursive/

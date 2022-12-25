@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-const int optimisation = 16;
+const int optimisation = 11;
 template<typename T, typename Compare>
 void sort(T* first, T* last, Compare comp) {
     if (first >= last) { return; }

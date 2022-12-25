@@ -1,8 +1,8 @@
 #include <iostream>
-const int optimisation = 4;
+const int optimisation = 16;
 template<typename T, typename Compare>
 void sort(T* first, T* last, Compare comp) {
-            if (first == last) { return; }
+            if (first >= last) { return; }
 
            
             if(last - first > optimisation) {
@@ -54,13 +54,19 @@ void sort(T* first, T* last, Compare comp) {
                 // выбор крайне правого элемент в качестве опорного элемента массива
 
                 //Рекурсивные вызовы, если осталось, что сортировать
-                if (ir > first) {
+                while (first < last)
+                {
                     //"Левый кусок"
-                    sort(first, ir, comp);
-                }
-                if (il < last) {
-                    //"Прaвый кусок"
-                    sort(il, last, comp);
+                    if (ir - first > last - il)
+                    {
+                        quickSort(first, ir, comp);
+                        first = il;
+                    }
+                    else//"Прaвый кусок"
+                    {
+                        quickSort(il, last, comp);
+                        last = ir;
+                    }
                 }
             }
             else {
@@ -88,9 +94,9 @@ void insertionSort(T* first, T* last, Compare comp) {
 
 //быстрая сортировка https://www.techiedelight.com/ru/quicksort/
 
-    template<typename T, typename Compare>
-    void quickSort(T* first, T* last, Compare comp) {
-        if (first == last) { return; }
+template<typename T, typename Compare>
+void quickSort(T* first, T* last, Compare comp) {
+        if (first >= last) { return; }
         T* il = first;//0
         T* ir = last;//z
         T* mid = first + (last - first) / 2;//Центральный элемент массива
@@ -138,15 +144,21 @@ void insertionSort(T* first, T* last, Compare comp) {
         // выбор крайне правого элемент в качестве опорного элемента массива
 
         //Рекурсивные вызовы, если осталось, что сортировать
-        if (ir > first) {
+        while (first < last)
+        {
             //"Левый кусок"
-            quickSort(first, ir, comp);
+            if (ir - first > last - il)
+            {
+                quickSort(first, ir, comp);
+                first = il;
+            }
+            else//"Прaвый кусок"
+            {
+                quickSort(il, last, comp);
+                last = ir;
+            }
         }
-        if (il < last) {
-            //"Прaвый кусок"
-            quickSort(il, last, comp);
-        }
-    }
+}
 
 
 
@@ -164,13 +176,13 @@ void showDigits(int* mas, int size) {
 
 int main()
 {
-    int size=10;
+    int size=20;
     /* int a[30];
      addDigits(a, size);
      quickSort(a, a + size -1, [](int a, int b) { return a < b; });
      std::cout << "\n";
      showDigits(a, size);*/
-    int a[10];
+    int a[20];
 
     addDigits(a, size);
     std::cout << "\n";

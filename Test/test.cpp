@@ -17,7 +17,7 @@ TEST(TestMegaSort, SortDifferent)
 		mas[i] = rand() % 100;
 	}
 
-	EXPECT_NO_THROW(sort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(sort(mas, mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
@@ -33,7 +33,7 @@ TEST(TestMegaSort, SortNotDifferent)
 		mas[i] = 10000;
 	}
 
-	EXPECT_NO_THROW(sort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(sort(mas, mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
@@ -49,7 +49,7 @@ TEST(TestMegaSort, SortSorted)
 		mas[i] = 10000 - i;
 	}
 
-	EXPECT_NO_THROW(sort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(sort(mas, mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
@@ -66,7 +66,7 @@ TEST(TestQuickSort, SortDifferent)
 		mas[i] = rand() % 100;
 	}
 
-	EXPECT_NO_THROW(quickSort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(quickSort(mas, mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
@@ -82,7 +82,7 @@ TEST(TestQuickSort, SortNotDifferent)
 		mas[i] = 10000;
 	}
 
-	EXPECT_NO_THROW(quickSort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(quickSort(mas, mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
@@ -98,7 +98,7 @@ TEST(TestQuickSort, SortSorted)
 		mas[i] = 10000 - i;
 	}
 
-	EXPECT_NO_THROW(quickSort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(quickSort(mas,mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
@@ -115,7 +115,7 @@ TEST(TestInsSort, SortDifferent)
 		mas[i] = rand() % 100;
 	}
 
-	EXPECT_NO_THROW(insertionSort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(insertionSort(mas,  mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
@@ -131,7 +131,7 @@ TEST(TestInsSort, SortNotDifferent)
 		mas[i] = 10000;
 	}
 
-	EXPECT_NO_THROW(insertionSort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(insertionSort(mas, mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
@@ -146,8 +146,7 @@ TEST(TestInsSort, SortSorted)
 	{
 		mas[i] = 10000 - i;
 	}
-
-	EXPECT_NO_THROW(insertionSort(mas, mas, mas+10000-1, [](int a, int b) { return a < b; }));
+	EXPECT_NO_THROW(insertionSort(mas, mas+10000-1, [](int a, int b) { return a < b; }));
 	for (int i = 0; i < 10000 - 1; i++)
 	{
 		EXPECT_LE(mas[i], mas[i + 1]);
